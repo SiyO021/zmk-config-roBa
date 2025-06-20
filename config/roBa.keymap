@@ -36,7 +36,7 @@
 
         trans {
             bindings = <&kp LC(SPACE)>;
-            key-positions = <27 26>;
+            key-positions = <13 12>;
         };
     };
 
