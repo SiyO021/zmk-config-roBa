@@ -10,6 +10,7 @@
 
 &trackball {
     // automouse-layer = <4>;
+
     scroll-layers = <5>;
     snipe-layers = <7>;
 
@@ -47,7 +48,7 @@
 
         trans {
             bindings = <&kp LC(SPACE)>;
-            key-positions = <13 12>;
+            key-positions = <3 4>;
         };
     };
 
