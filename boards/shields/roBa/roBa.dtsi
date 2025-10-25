@@ -102,9 +102,9 @@
         status = "okay";
     };
 
-    right_encoder: encoder_right {
-        status = "disabled";
-    };
+    // right_encoder: encoder_right {
+    //     status = "disabled";
+    // };
 
     sensors: sensors {
         compatible = "zmk,keymap-sensors";
