@@ -66,10 +66,13 @@
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+            tick = <1>;
+            tap-ms = <5>;
+            wait-ms = <0>;
 
             // 追加: スクロールのタップ時間を設定 (20ms)
 
-            tap-ms = <20>;
+            // tap-ms = <20>;
         };
 
         lt_to_layer_0: lt_to_layer_0 {
