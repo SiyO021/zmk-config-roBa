@@ -62,14 +62,21 @@
     };
 
     behaviors {
-        scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+        // scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
+        //     compatible = "zmk,behavior-sensor-rotate";
+        //     #sensor-binding-cells = <0>;
+        //     bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
 
             // 追加: スクロールのタップ時間を設定 (20ms)
 
-            tap-ms = <20>;
+        //     tap-ms = <20>;
+        // };
+
+        rot_scroll: rot_scroll {
+          compatible = "zmk,behavior-sensor-rotate-var";
+          #sensor-binding-cells = <2>;
+          bindings = <&msc>, <&msc>;
+          tap-ms = <10>;   // 5–20ms目安
         };
 
         lt_to_layer_0: lt_to_layer_0 {
@@ -93,7 +100,7 @@
 &mt LEFT_SHIFT ESCAPE  &kp LEFT_GUI  &kp LEFT_ALT  &mt LEFT_CONTROL DELETE  &lt_to_layer_0 3 SPACE  &lt_to_layer_0 7 TAB            &kp BACKSPACE  &lt 2 ENTER                             &kp DEL
             >;
 
-            sensor-bindings = <&scroll_up_down>;
+            sensor-bindings = <&rot_scroll SCRL_DOWN SCRL_UP>;
         };
 
         FUNCTION {
@@ -121,8 +128,6 @@
 &kp LEFT_SHIFT  &trans          &kp LEFT_GUI    &kp LG(TAB)       &trans        &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans          &trans          &trans          &trans            &trans        &trans      &trans  &trans                          &trans
             >;
-
-            sensor-bindings = <&scroll_up_down>;
         };
 
         MOUSE {
