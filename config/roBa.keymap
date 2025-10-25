@@ -87,13 +87,13 @@
             tapping-term-ms = <200>;
         };
 
-        test_rot: behavior_sensor_rotate {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&kp F20>, <&kp F21>;
+        //test_rot: behavior_sensor_rotate {
+        //    compatible = "zmk,behavior-sensor-rotate";
+        //    #sensor-binding-cells = <0>;
+        //    bindings = <&kp F20>, <&kp F21>;
 
-            tap-ms = <40>;
-        };
+        //    tap-ms = <40>;
+        //};
     };
 
     keymap {
