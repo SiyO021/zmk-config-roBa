@@ -66,17 +66,16 @@
         //     compatible = "zmk,behavior-sensor-rotate";
         //     #sensor-binding-cells = <0>;
         //     bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-
-            // 追加: スクロールのタップ時間を設定 (20ms)
-
+        // 追加: スクロールのタップ時間を設定 (20ms)
         //     tap-ms = <20>;
         // };
 
         rot_scroll: rot_scroll {
-          compatible = "zmk,behavior-sensor-rotate-var";
-          #sensor-binding-cells = <2>;
-          bindings = <&msc>, <&msc>;
-          tap-ms = <10>;   // 5–20ms目安
+            compatible = "zmk,behavior-sensor-rotate-var";
+            #sensor-binding-cells = <2>;
+            bindings = <&msc>, <&msc>;
+
+            tap-ms = <10>;   // 5–20ms目安
         };
 
         lt_to_layer_0: lt_to_layer_0 {
@@ -89,10 +88,11 @@
         };
 
         test_rot: behavior_sensor_rotate {
-          compatible = "zmk,behavior-sensor-rotate";
-          #sensor-binding-cells = <0>;
-          bindings = <&kp F20>, <&kp F21>;
-          tap-ms = <40>;
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp F20>, <&kp F21>;
+
+            tap-ms = <40>;
         };
     };
 
@@ -107,7 +107,7 @@
 &mt LEFT_SHIFT ESCAPE  &kp LEFT_GUI  &kp LEFT_ALT  &mt LEFT_CONTROL DELETE  &lt_to_layer_0 3 SPACE  &lt_to_layer_0 7 TAB            &kp BACKSPACE  &lt 2 ENTER                             &kp DEL
             >;
 
-            sensor-bindings = <&rot_scroll SCRL_DOWN SCRL_UP>;
+            sensor-bindings = <&test_rot>;
         };
 
         FUNCTION {
