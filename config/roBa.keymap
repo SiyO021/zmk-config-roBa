@@ -81,14 +81,14 @@
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
 
-            tap-ms = <30>;     // 40–60の範囲で調整
+            tap-ms = <5>;     // 40–60の範囲で調整
         };
 
         enc_test: enc-test {
           compatible = "zmk,behavior-sensor-rotate";
           #sensor-binding-cells = <0>;
           bindings = <&kp A>, <&kp B>;
-          tap-ms = <5>;
+          tap-ms = <30>;
         };
 
         lt_to_layer_0: lt_to_layer_0 {
