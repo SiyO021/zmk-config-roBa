@@ -81,7 +81,7 @@
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
 
-            tap-ms = <50>;     // 40–60の範囲で調整
+            tap-ms = <30>;     // 40–60の範囲で調整
         };
 
         enc_test: enc-test {
