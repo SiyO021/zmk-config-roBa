@@ -87,7 +87,7 @@
         enc_test: enc-test {
           compatible = "zmk,behavior-sensor-rotate";
           #sensor-binding-cells = <0>;
-          bindings = <&kp A>, <&kp B;
+          bindings = <&kp A>, <&kp B>;
           tap-ms = <30>;
         };
 
