@@ -85,10 +85,11 @@
         };
 
         enc_test: enc-test {
-          compatible = "zmk,behavior-sensor-rotate";
-          #sensor-binding-cells = <0>;
-          bindings = <&kp A>, <&kp B>;
-          tap-ms = <30>;
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp A>, <&kp B>;
+
+            tap-ms = <30>;
         };
 
         lt_to_layer_0: lt_to_layer_0 {
@@ -119,7 +120,7 @@
 &mt LEFT_SHIFT ESCAPE  &kp LEFT_GUI  &kp LEFT_ALT  &mt LEFT_CONTROL DELETE  &lt_to_layer_0 3 SPACE  &lt_to_layer_0 7 TAB            &kp BACKSPACE  &lt 2 ENTER                             &kp DEL
             >;
 
-            sensor-bindings = <&enc_scroll>;
+            sensor-bindings = <&inc_dec_kp PAGE_DOWN PAGE_UP>;
         };
 
         FUNCTION {
