@@ -3,15 +3,50 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
+/* Windows日本語106/109配列用 */
+
+#define JP_EXCLAMATION  LS(N1)          // !
+#define JP_DOUBLE_QUOTE LS(N2)          // "
+#define JP_HASH         LS(N3)          // #
+#define JP_DOLLAR       LS(N4)          // $
+#define JP_PERCENT      LS(N5)          // %
+#define JP_AMPERSAND    LS(N6)          // &
+#define JP_SINGLE_QUOTE LS(N7)          // '
+#define JP_LEFT_PAREN   LS(N8)          // (
+#define JP_RIGHT_PAREN  LS(N9)          // )
+
+#define JP_EQUAL        LS(MINUS)       // =
+#define JP_CARET        EQUAL           // ^
+#define JP_TILDE        LS(EQUAL)       // ~
+
+#define JP_AT           LEFT_BRACKET    // @
+#define JP_GRAVE        LS(LEFT_BRACKET) // `
+#define JP_LEFT_BRACKET RIGHT_BRACKET   // [
+#define JP_LEFT_BRACE   LS(RIGHT_BRACKET) // {
+
+#define JP_RIGHT_BRACKET BACKSLASH      // ]
+#define JP_RIGHT_BRACE   LS(BACKSLASH)  // }
+
+#define JP_PLUS         LS(SEMICOLON)   // +
+#define JP_COLON        SQT             // :
+#define JP_ASTERISK     LS(SQT)         // *
+
+#define JP_BACKSLASH    INT1            // \（ろキー）
+#define JP_UNDERSCORE   LS(INT1)        // _
+#define JP_YEN          INT3            // ¥
+#define JP_PIPE         LS(INT3)        // |
+
 #define L_BASE          0
 #define L_MAC           1
-#define L_FUNCTION      2
-#define L_NUM           3
-#define L_ARROW         4
-#define L_MOUSE         5
-#define L_SCROLL        6
-#define L_CHANGE_DEVICE 7
-#define L_SNIPE         8
+#define L_WIN_JIS       2
+#define L_FUNCTION      3
+#define L_NUM           4
+#define L_ARROW         5
+#define L_MOUSE         6
+#define L_SCROLL        7
+#define L_CHANGE_DEVICE 8
+#define L_SNIPE         9
+#define L_WIN_JIS_NUM   10
 
 &mt {
     flavor = "balanced";
@@ -38,6 +73,15 @@
 };
 
 / {
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+    
+        win_jis_num {
+            if-layers = <L_WIN_JIS L_NUM>;
+            then-layer = <L_WIN_JIS_NUM>;
+        };
+    };
+
     combos {
         compatible = "zmk,combos";
 
@@ -69,39 +113,58 @@
 //            bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
 //            label = "TO_LAYER_0";
 //        };
-        to_layer_0: to_layer_0 {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            bindings =
-                <&to L_BASE>,
-                <&macro_param_1to1>,
-                <&kp MACRO_PLACEHOLDER>;
-            label = "TO_LAYER_0";
-        };
-        select_win_profile: select_win_profile {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
 
+//        to_layer_0: to_layer_0 {
+//            compatible = "zmk,behavior-macro-one-param";
+//            #binding-cells = <1>;
+//            bindings =
+//                <&to L_BASE>,
+//                <&macro_param_1to1>,
+//                <&kp MACRO_PLACEHOLDER>;
+//            label = "TO_LAYER_0";
+//        };
+        select_win_us: select_win_us {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+        
             wait-ms = <0>;
             tap-ms = <0>;
-
+        
             bindings =
+                <&layer_off L_MAC_US>,
+                <&layer_off L_WIN_JIS>,
                 <&macro_param_1to2>,
-                <&bt BT_SEL MACRO_PLACEHOLDER>,
-                <&layer_off L_MAC>;
+                <&bt BT_SEL MACRO_PLACEHOLDER>;
         };
 
-        select_mac_profile: select_mac_profile {
+        select_win_jis: select_win_jis {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
-
+        
             wait-ms = <0>;
             tap-ms = <0>;
-
+        
             bindings =
+                <&layer_off L_MAC_US>,
+                <&layer_off L_WIN_JIS>,
+                <&layer_on L_WIN_JIS>,
                 <&macro_param_1to2>,
-                <&bt BT_SEL MACRO_PLACEHOLDER>,
-                <&layer_on L_MAC>;
+                <&bt BT_SEL MACRO_PLACEHOLDER>;
+        };
+
+        select_mac_us: select_mac_us {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+        
+            wait-ms = <0>;
+            tap-ms = <0>;
+        
+            bindings =
+                <&layer_off L_WIN_JIS>,
+                <&layer_off L_MAC_US>,
+                <&layer_on L_MAC_US>,
+                <&macro_param_1to2>,
+                <&bt BT_SEL MACRO_PLACEHOLDER>;
         };
     };
 
@@ -136,14 +199,14 @@
             tap-ms = <30>;
         };
 
-        lt_to_layer_0: lt_to_layer_0 {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LAYER_TAP_TO_0";
-            bindings = <&mo>, <&to_layer_0>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-        };
+//        lt_to_layer_0: lt_to_layer_0 {
+//            compatible = "zmk,behavior-hold-tap";
+//            label = "LAYER_TAP_TO_0";
+//            bindings = <&mo>, <&to_layer_0>;
+//
+//            #binding-cells = <2>;
+//            tapping-term-ms = <200>;
+//        };
 
         //test_rot: behavior_sensor_rotate {
         //    compatible = "zmk,behavior-sensor-rotate";
@@ -163,6 +226,17 @@
             #binding-cells = <1>;
             toggle-mode = "off";
         };
+
+        profile_safe_lt: profile_safe_lt {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+        
+            bindings = <&mo>, <&kp>;
+        
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <0>;
+        };
     };
 
     keymap {
@@ -172,8 +246,8 @@
             bindings = <
 &kp Q             &kp W         &kp E         &kp R             &kp T                                                                  &kp Y        &kp U  &lt L_SCROLL I  &kp O    &mt LSHFT P
 &kp A             &kp S         &kp D         &kp F             &lt L_MOUSE G           &kp LS(LG(S))                   &kp SQT        &kp H        &kp J  &kp K           &kp L    &lt L_MOUSE MINUS
-&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V             &kp B                   &lt_to_layer_0 L_CHANGE_DEVICE BACKSLASH      &kp SEMICOLON  &kp N        &kp M  &kp COMMA       &kp DOT  &mt LCTRL SLASH
-&lt L_FUNCTION ESCAPE      &kp LEFT_GUI  &kp LEFT_ALT  &kp LEFT_CONTROL  &lt_to_layer_0 L_ARROW SPACE  &lt_to_layer_0 L_SNIPE TAB            &kp BACKSPACE  &lt L_NUM ENTER                             &kp DEL
+&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V             &kp B                   &profile_safe_lt L_CHANGE_DEVICE BACKSLASH      &kp SEMICOLON  &kp N        &kp M  &kp COMMA       &kp DOT  &mt LCTRL SLASH
+&lt L_FUNCTION ESCAPE      &kp LEFT_GUI  &kp LEFT_ALT  &kp LEFT_CONTROL  &profile_safe_lt L_ARROW SPACE  &profile_safe_lt L_SNIPE TAB            &kp BACKSPACE  &lt L_NUM ENTER                             &kp DEL
             >;
 
             sensor-bindings = <&inc_dec_kp PAGE_DOWN PAGE_UP>;
@@ -187,6 +261,18 @@
 &trans  &trans            &trans  &trans        &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans            &trans  &trans        &trans  &trans      &trans  &trans  &trans  &trans  &trans  &mt LGUI SLASH
 &trans  &kp LEFT_CONTROL  &trans  &kp LEFT_GUI  &trans  &trans      &trans  &trans                          &trans
+            >;
+        };
+
+        WIN_JIS {
+            display-name = "Windows JIS";
+        
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &kp JP_SINGLE_QUOTE  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &profile_safe_lt L_CHANGE_DEVICE JP_BACKSLASH
+                                                     &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
             >;
         };
 
@@ -237,7 +323,7 @@
 
         CHANGE_DEVICE {
             bindings = <
-&trans  &trans        &trans        &trans        &trans                           &select_win_profile 0  &select_win_profile 1  &select_mac_profile 2  &select_win_profile 3  &select_win_profile 4
+&trans  &trans        &trans        &trans        &trans                           &select_win_jis 0  &select_win_us 1  &select_mac_us 2  &select_win_us 3  &select_win_us 4
 &trans  &trans        &trans        &trans        &trans  &trans      &trans       &trans        &trans        &trans        &trans        &trans
 &trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &trans  &trans      &bootloader  &trans        &trans        &trans        &trans        &bt BT_CLR_ALL
 &trans  &trans        &trans        &trans        &trans  &trans      &trans       &trans                                                  &bt BT_CLR
@@ -250,6 +336,30 @@
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
+            >;
+        };
+
+        WIN_JIS_NUM {
+            display-name = "Windows JIS NUM";
+        
+            bindings = <
+&trans                   &kp N7              &kp N8              &kp N9              &kp MINUS
+                                                &kp JP_AMPERSAND  &kp JP_TILDE         &kp JP_LEFT_PAREN
+                                                &kp JP_RIGHT_PAREN &kp JP_CARET
+
+&kp JP_EQUAL             &kp N4              &kp N5              &kp N6              &kp SLASH
+                                                &trans            &kp JP_GRAVE         &kp JP_HASH
+                                                &kp JP_AT         &kp JP_LEFT_BRACKET  &kp JP_RIGHT_BRACKET
+                                                &kp JP_PERCENT
+
+&mt LEFT_SHIFT N0        &kp N1              &kp N2              &kp N3              &kp JP_PERCENT
+                                                &kp PERIOD        &kp JP_PERCENT       &kp JP_EXCLAMATION
+                                                &kp JP_DOLLAR     &kp JP_LEFT_BRACE    &kp JP_RIGHT_BRACE
+                                                &kp JP_BACKSLASH
+
+&trans                   &trans              &trans              &kp JP_CARET         &kp JP_ASTERISK
+                                                &kp JP_PLUS       &trans               &trans
+                                                                                       &kp JP_PIPE
             >;
         };
     };
