@@ -155,17 +155,13 @@
         layer_on: layer_on {
             compatible = "zmk,behavior-toggle-layer";
             #binding-cells = <1>;
-            display-name = "Layer On";
             toggle-mode = "on";
-            locking;
         };
 
         layer_off: layer_off {
             compatible = "zmk,behavior-toggle-layer";
             #binding-cells = <1>;
-            display-name = "Layer Off";
             toggle-mode = "off";
-            locking;
         };
     };
 
