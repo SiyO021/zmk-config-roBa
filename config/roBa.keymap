@@ -396,7 +396,7 @@
     bindings = <
 &trans  &trans  &trans  &trans  &trans                              &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans    &trans    &jis_us_quote   &trans  &trans  &trans  &trans  &jis_us_minus
-&trans  &trans  &trans  &trans  &trans    &jis_us_backslash  &jis_us_semicolon  &trans  &trans  &kp COMMA  &kp DOT &mt LCTRL SLASH
+&trans  &trans  &trans  &trans  &trans    &jis_us_backslash  &jis_us_semicolon  &trans  &trans  &kp COMMA  &kp DOT &lt L_MOUSE SLASH
 &trans  &trans  &trans  &trans  &trans    &trans      &trans &trans                                          &trans
         >;
     };
