@@ -75,6 +75,9 @@
 #define L_SNIPE         9
 #define L_WIN_JIS_NUM   10
 
+#define L_GESTURE       11
+#define L_MAC_GESTURE   12
+
 &mt {
     flavor = "balanced";
     quick-tap-ms = <0>;
@@ -85,6 +88,36 @@
 
     scroll-layers = <L_SCROLL>;
     snipe-layers = <L_SNIPE>;
+
+    // Windows
+    win_desktop {
+        layers = <L_GESTURE>;
+
+        bindings =
+            <&kp LG(LC(RIGHT_ARROW))>,
+            <&kp LG(LC(LEFT_ARROW))>,
+            <&kp LG(TAB)>,
+            <&kp LA(TAB)>;
+
+        tick = <120>;
+        wait-ms = <30>;
+        tap-ms = <40>;
+    }
+
+    // macOS
+    mac_desktop {
+        layers = <L_MAC_GESTURE>;
+
+        bindings =
+            <&kp LC(RIGHT_ARROW)>,
+            <&kp LC(LEFT_ARROW)>,
+            <&kp LC(UP_ARROW)>,
+            <&kp LG(TAB)>;
+
+        tick = <120>;
+        wait-ms = <30>;
+        tap-ms = <40>;
+    };
 
     // arrows {
     //     layers = <L_ARROW>;
@@ -106,6 +139,11 @@
         win_jis_num {
             if-layers = <L_WIN_JIS L_NUM>;
             then-layer = <L_WIN_JIS_NUM>;
+        };
+
+        mac_gesture {
+            if-layers = <L_MAC_US L_GESTURE>;
+            then-layer = <L_MAC_GESTURE>;
         };
     };
 
@@ -487,5 +525,43 @@
                                                                                        &kp JP_PIPE
             >;
         };
+
+        
+        GESTURE {
+            display-name = "Gesture";
+        
+            bindings = <
+                &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans
+        
+                &trans &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans &trans
+        
+                &trans &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans &trans
+        
+                &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans
+            >;
+        };
+        
+        MAC_GESTURE {
+            display-name = "Mac Gesture";
+        
+            bindings = <
+                &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans
+        
+                &trans &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans &trans
+        
+                &trans &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans &trans
+        
+                &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans
+            >;
+        };
+
     };
 };
