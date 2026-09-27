@@ -347,10 +347,10 @@
 
         default_layer {
             bindings = <
-&kp Q                  &kp W         &kp E         &kp R             &kp T                                                                                 &kp Y            &kp U  &lt L_SCROLL I  &kp O    &mt LSHFT P
-&kp A                  &kp S         &kp D         &kp F             &lt L_MOUSE G                        &kp LS(LG(S))                     &kp SQT        &kp H            &kp J  &lt 11 K        &kp L    &lt L_MOUSE MINUS
-&mt LEFT_SHIFT Z       &kp X         &kp C         &kp V             &change_device_lt L_CHANGE_DEVICE B  &kp BACKSLASH                     &kp SEMICOLON  &kp N            &kp M  &kp COMMA       &kp DOT  &mt LCTRL SLASH
-&lt L_FUNCTION ESCAPE  &kp LEFT_GUI  &kp LEFT_ALT  &kp LEFT_CONTROL  &profile_safe_lt L_ARROW SPACE       &profile_safe_lt L_SNIPE TAB      &kp BACKSPACE  &lt L_NUM ENTER                                  &kp DEL
+&kp Q                  &kp W         &kp E         &kp R             &kp T                                                                                 &kp Y            &kp U  &lt L_SCROLL I  &lt 11 O  &mt LSHFT P
+&kp A                  &kp S         &kp D         &kp F             &lt L_MOUSE G                        &kp LS(LG(S))                     &kp SQT        &kp H            &kp J  &kp K           &kp L     &lt L_MOUSE MINUS
+&mt LEFT_SHIFT Z       &kp X         &kp C         &kp V             &change_device_lt L_CHANGE_DEVICE B  &kp BACKSLASH                     &kp SEMICOLON  &kp N            &kp M  &kp COMMA       &kp DOT   &mt LCTRL SLASH
+&lt L_FUNCTION ESCAPE  &kp LEFT_GUI  &kp LEFT_ALT  &kp LEFT_CONTROL  &profile_safe_lt L_ARROW SPACE       &profile_safe_lt L_SNIPE TAB      &kp BACKSPACE  &lt L_NUM ENTER                                   &kp DEL
             >;
 
             sensor-bindings = <&inc_dec_kp PAGE_DOWN PAGE_UP>;
