@@ -102,7 +102,7 @@
         tick = <120>;
         wait-ms = <30>;
         tap-ms = <40>;
-    }
+    };
 
     // macOS
     mac_desktop {
