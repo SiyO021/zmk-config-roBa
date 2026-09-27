@@ -1,7 +1,7 @@
+#include <dt-bindings/zmk/modifiers.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/modifiers.h>
 #include <dt-bindings/zmk/pointing.h>
 
 /* Windows日本語106/109配列用 */
@@ -15,23 +15,18 @@
 #define JP_SINGLE_QUOTE LS(N7)          // '
 #define JP_LEFT_PAREN   LS(N8)          // (
 #define JP_RIGHT_PAREN  LS(N9)          // )
-
 #define JP_EQUAL        LS(MINUS)       // =
 #define JP_CARET        EQUAL           // ^
 #define JP_TILDE        LS(EQUAL)       // ~
-
 #define JP_AT           LEFT_BRACKET    // @
 #define JP_GRAVE        LS(LEFT_BRACKET) // `
 #define JP_LEFT_BRACKET RIGHT_BRACKET   // [
 #define JP_LEFT_BRACE   LS(RIGHT_BRACKET) // {
-
 #define JP_RIGHT_BRACKET BACKSLASH      // ]
 #define JP_RIGHT_BRACE   LS(BACKSLASH)  // }
-
 #define JP_PLUS         LS(SEMICOLON)   // +
 #define JP_COLON        SQT             // :
 #define JP_ASTERISK     LS(SQT)         // *
-
 #define JP_BACKSLASH    INT1            // \（ろキー）
 #define JP_UNDERSCORE   LS(INT1)        // _
 #define JP_YEN          INT3            // ¥
@@ -41,28 +36,20 @@
 
 #define JIS_US_GRAVE      LS(LEFT_BRACKET)   /* ` */
 #define JIS_US_TILDE      LS(EQUAL)          /* ~ */
-
 #define JIS_US_MINUS      MINUS              /* - */
 #define JIS_US_UNDERSCORE LS(INT1)           /* _ */
-
 #define JIS_US_EQUAL      LS(MINUS)           /* = */
 #define JIS_US_PLUS       LS(SEMICOLON)       /* + */
-
 #define JIS_US_LBRACKET   RIGHT_BRACKET       /* [ */
 #define JIS_US_LBRACE     LS(RIGHT_BRACKET)   /* { */
-
 #define JIS_US_RBRACKET   BACKSLASH           /* ] */
 #define JIS_US_RBRACE     LS(BACKSLASH)       /* } */
-
 #define JIS_US_BACKSLASH  INT3                /* \ または ¥ 表示 */
 #define JIS_US_PIPE       LS(INT3)            /* | */
-
 #define JIS_US_SEMICOLON  SEMICOLON           /* ; */
 #define JIS_US_COLON      SQT                 /* : */
-
 #define JIS_US_APOSTROPHE LS(N7)              /* ' */
 #define JIS_US_DQUOTE     LS(N2)              /* " */
-
 #define L_BASE          0
 #define L_MAC_US        1
 #define L_WIN_JIS       2
@@ -74,7 +61,6 @@
 #define L_CHANGE_DEVICE 8
 #define L_SNIPE         9
 #define L_WIN_JIS_NUM   10
-
 #define L_GESTURE       11
 #define L_MAC_GESTURE   12
 
@@ -90,9 +76,9 @@
     snipe-layers = <L_SNIPE>;
 
     // Windows
+
     win_desktop {
         layers = <L_GESTURE>;
-
         bindings =
             <&kp LG(LC(RIGHT_ARROW))>,
             <&kp LG(LC(LEFT_ARROW))>,
@@ -105,9 +91,9 @@
     };
 
     // macOS
+
     mac_desktop {
         layers = <L_MAC_GESTURE>;
-
         bindings =
             <&kp LC(RIGHT_ARROW)>,
             <&kp LC(LEFT_ARROW)>,
@@ -135,7 +121,7 @@
 / {
     conditional_layers {
         compatible = "zmk,conditional-layers";
-    
+
         win_jis_num {
             if-layers = <L_WIN_JIS L_NUM>;
             then-layer = <L_WIN_JIS_NUM>;
@@ -172,64 +158,44 @@
     };
 
     macros {
-//        to_layer_0: to_layer_0 {
-//            compatible = "zmk,behavior-macro-one-param";
-//            #binding-cells = <1>;
-//            bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
-//            label = "TO_LAYER_0";
-//        };
+        //        to_layer_0: to_layer_0 {
+        //            compatible = "zmk,behavior-macro-one-param";
+        //            #binding-cells = <1>;
+        //            bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
+        //            label = "TO_LAYER_0";
+        //        };
+        //        to_layer_0: to_layer_0 {
+        //            compatible = "zmk,behavior-macro-one-param";
+        //            #binding-cells = <1>;
+        //            bindings =
+        //                <&to L_BASE>,
+        //                <&macro_param_1to1>,
+        //                <&kp MACRO_PLACEHOLDER>;
+        //            label = "TO_LAYER_0";
+        //        };
 
-//        to_layer_0: to_layer_0 {
-//            compatible = "zmk,behavior-macro-one-param";
-//            #binding-cells = <1>;
-//            bindings =
-//                <&to L_BASE>,
-//                <&macro_param_1to1>,
-//                <&kp MACRO_PLACEHOLDER>;
-//            label = "TO_LAYER_0";
-//        };
         select_win_us: select_win_us {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
-        
             wait-ms = <0>;
             tap-ms = <0>;
-        
-            bindings =
-                <&layer_off L_MAC_US>,
-                <&layer_off L_WIN_JIS>,
-                <&macro_param_1to2>,
-                <&bt BT_SEL MACRO_PLACEHOLDER>;
+            bindings = <&layer_off L_MAC_US &layer_off L_WIN_JIS &macro_param_1to2 &bt BT_SEL MACRO_PLACEHOLDER>;
         };
 
         select_win_jis: select_win_jis {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
-        
             wait-ms = <0>;
             tap-ms = <0>;
-        
-            bindings =
-                <&layer_off L_MAC_US>,
-                <&layer_off L_WIN_JIS>,
-                <&layer_on L_WIN_JIS>,
-                <&macro_param_1to2>,
-                <&bt BT_SEL MACRO_PLACEHOLDER>;
+            bindings = <&layer_off L_MAC_US &layer_off L_WIN_JIS &layer_on L_WIN_JIS &macro_param_1to2 &bt BT_SEL MACRO_PLACEHOLDER>;
         };
 
         select_mac_us: select_mac_us {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
-        
             wait-ms = <0>;
             tap-ms = <0>;
-        
-            bindings =
-                <&layer_off L_WIN_JIS>,
-                <&layer_off L_MAC_US>,
-                <&layer_on L_MAC_US>,
-                <&macro_param_1to2>,
-                <&bt BT_SEL MACRO_PLACEHOLDER>;
+            bindings = <&layer_off L_WIN_JIS &layer_off L_MAC_US &layer_on L_MAC_US &macro_param_1to2 &bt BT_SEL MACRO_PLACEHOLDER>;
         };
     };
 
@@ -264,15 +230,14 @@
             tap-ms = <30>;
         };
 
-//        lt_to_layer_0: lt_to_layer_0 {
-//            compatible = "zmk,behavior-hold-tap";
-//            label = "LAYER_TAP_TO_0";
-//            bindings = <&mo>, <&to_layer_0>;
-//
-//            #binding-cells = <2>;
-//            tapping-term-ms = <200>;
-//        };
-
+        //        lt_to_layer_0: lt_to_layer_0 {
+        //            compatible = "zmk,behavior-hold-tap";
+        //            label = "LAYER_TAP_TO_0";
+        //            bindings = <&mo>, <&to_layer_0>;
+        //
+        //            #binding-cells = <2>;
+        //            tapping-term-ms = <200>;
+        //        };
         //test_rot: behavior_sensor_rotate {
         //    compatible = "zmk,behavior-sensor-rotate";
         //    #sensor-binding-cells = <0>;
@@ -295,9 +260,8 @@
         profile_safe_lt: profile_safe_lt {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-        
             bindings = <&mo>, <&kp>;
-        
+
             flavor = "balanced";
             tapping-term-ms = <200>;
             quick-tap-ms = <0>;
@@ -306,9 +270,8 @@
         change_device_lt: change_device_lt {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-        
             bindings = <&mo>, <&kp>;
-        
+
             flavor = "balanced";
             tapping-term-ms = <250>;
             quick-tap-ms = <150>;
@@ -317,88 +280,64 @@
         jis_us_grave: jis_us_grave {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-        
-            bindings =
-                <&kp JIS_US_GRAVE>,
-                <&kp JIS_US_TILDE>;
-        
+            bindings = <&kp JIS_US_GRAVE>, <&kp JIS_US_TILDE>;
+
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
-        
+
         jis_us_minus: jis_us_minus {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-        
-            bindings =
-                <&kp JIS_US_MINUS>,
-                <&kp JIS_US_UNDERSCORE>;
-        
+            bindings = <&kp JIS_US_MINUS>, <&kp JIS_US_UNDERSCORE>;
+
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
-        
+
         jis_us_equal: jis_us_equal {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-        
-            bindings =
-                <&kp JIS_US_EQUAL>,
-                <&kp JIS_US_PLUS>;
-        
+            bindings = <&kp JIS_US_EQUAL>, <&kp JIS_US_PLUS>;
+
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
-        
+
         jis_us_lbracket: jis_us_lbracket {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-        
-            bindings =
-                <&kp JIS_US_LBRACKET>,
-                <&kp JIS_US_LBRACE>;
-        
+            bindings = <&kp JIS_US_LBRACKET>, <&kp JIS_US_LBRACE>;
+
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
-        
+
         jis_us_rbracket: jis_us_rbracket {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-        
-            bindings =
-                <&kp JIS_US_RBRACKET>,
-                <&kp JIS_US_RBRACE>;
-        
+            bindings = <&kp JIS_US_RBRACKET>, <&kp JIS_US_RBRACE>;
+
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
-        
+
         jis_us_backslash: jis_us_backslash {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-        
-            bindings =
-                <&kp JIS_US_BACKSLASH>,
-                <&kp JIS_US_PIPE>;
-        
+            bindings = <&kp JIS_US_BACKSLASH>, <&kp JIS_US_PIPE>;
+
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
-        
+
         jis_us_semicolon: jis_us_semicolon {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-        
-            bindings =
-                <&kp JIS_US_SEMICOLON>,
-                <&kp JIS_US_COLON>;
-        
+            bindings = <&kp JIS_US_SEMICOLON>, <&kp JIS_US_COLON>;
+
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
-        
+
         jis_us_quote: jis_us_quote {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-        
-            bindings =
-                <&kp JIS_US_APOSTROPHE>,
-                <&kp JIS_US_DQUOTE>;
-        
+            bindings = <&kp JIS_US_APOSTROPHE>, <&kp JIS_US_DQUOTE>;
+
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
     };
@@ -408,10 +347,10 @@
 
         default_layer {
             bindings = <
-&kp Q             &kp W         &kp E         &kp R             &kp T                                                                  &kp Y        &kp U  &lt L_SCROLL I  &kp O    &mt LSHFT P
-&kp A             &kp S         &kp D         &kp F             &lt L_MOUSE G           &kp LS(LG(S))                   &kp SQT        &kp H        &kp J  &kp K           &kp L    &lt L_MOUSE MINUS
-&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V             &change_device_lt L_CHANGE_DEVICE B   &kp BACKSLASH      &kp SEMICOLON  &kp N        &kp M  &kp COMMA       &kp DOT  &mt LCTRL SLASH
-&lt L_FUNCTION ESCAPE      &kp LEFT_GUI  &kp LEFT_ALT  &kp LEFT_CONTROL  &profile_safe_lt L_ARROW SPACE  &profile_safe_lt L_SNIPE TAB            &kp BACKSPACE  &lt L_NUM ENTER                             &kp DEL
+&kp Q                  &kp W         &kp E         &kp R             &kp T                                                                                 &kp Y            &kp U  &lt L_SCROLL I  &kp O    &mt LSHFT P
+&kp A                  &kp S         &kp D         &kp F             &lt L_MOUSE G                        &kp LS(LG(S))                     &kp SQT        &kp H            &kp J  &lt 11 K        &kp L    &lt L_MOUSE MINUS
+&mt LEFT_SHIFT Z       &kp X         &kp C         &kp V             &change_device_lt L_CHANGE_DEVICE B  &kp BACKSLASH                     &kp SEMICOLON  &kp N            &kp M  &kp COMMA       &kp DOT  &mt LCTRL SLASH
+&lt L_FUNCTION ESCAPE  &kp LEFT_GUI  &kp LEFT_ALT  &kp LEFT_CONTROL  &profile_safe_lt L_ARROW SPACE       &profile_safe_lt L_SNIPE TAB      &kp BACKSPACE  &lt L_NUM ENTER                                  &kp DEL
             >;
 
             sensor-bindings = <&inc_dec_kp PAGE_DOWN PAGE_UP>;
@@ -419,7 +358,6 @@
 
         mac_layer {
             display-name = "macOS";
-
             bindings = <
 &trans  &trans            &trans  &trans        &trans                      &trans  &trans  &trans  &trans  &trans
 &trans  &trans            &trans  &trans        &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
@@ -429,15 +367,14 @@
         };
 
         WIN_JIS {
-    display-name = "Windows JIS";
-
-    bindings = <
-&trans  &trans  &trans  &trans  &trans                              &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans    &trans    &jis_us_quote   &trans  &trans  &trans  &trans  &jis_us_minus
-&trans  &trans  &trans  &trans  &trans    &jis_us_backslash  &jis_us_semicolon  &trans  &trans  &kp COMMA  &kp DOT &lt L_MOUSE SLASH
-&trans  &trans  &trans  &trans  &trans    &trans      &trans &trans                                          &trans
-        >;
-    };
+            display-name = "Windows JIS";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                                            &trans  &trans  &trans     &trans   &trans
+&trans  &trans  &trans  &trans  &trans  &trans                 &jis_us_quote      &trans  &trans  &trans     &trans   &jis_us_minus
+&trans  &trans  &trans  &trans  &trans  &jis_us_backslash      &jis_us_semicolon  &trans  &trans  &kp COMMA  &kp DOT  &lt L_MOUSE SLASH
+&trans  &trans  &trans  &trans  &trans  &trans                 &trans             &trans                              &trans
+            >;
+        };
 
         FUNCTION {
             bindings = <
@@ -487,9 +424,9 @@
         CHANGE_DEVICE {
             bindings = <
 &trans  &trans        &trans        &trans        &trans                           &select_win_jis 0  &select_win_us 1  &select_mac_us 2  &select_win_us 3  &select_win_us 4
-&trans  &trans        &trans        &trans        &trans  &trans      &trans       &trans        &trans        &trans        &trans        &trans
-&trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &trans  &trans      &bootloader  &trans        &trans        &trans        &trans        &bt BT_CLR_ALL
-&trans  &trans        &trans        &trans        &trans  &trans      &trans       &trans                                                  &bt BT_CLR
+&trans  &trans        &trans        &trans        &trans  &trans      &trans       &trans             &trans            &trans            &trans            &trans
+&trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &trans  &trans      &bootloader  &trans             &trans            &trans            &trans            &bt BT_CLR_ALL
+&trans  &trans        &trans        &trans        &trans  &trans      &trans       &trans                                                                   &bt BT_CLR
             >;
         };
 
@@ -504,64 +441,32 @@
 
         WIN_JIS_NUM {
             display-name = "Windows JIS NUM";
-        
             bindings = <
-&trans                   &kp N7              &kp N8              &kp N9              &kp MINUS
-                                                &kp JP_AMPERSAND  &kp JP_TILDE         &kp JP_LEFT_PAREN
-                                                &kp JP_RIGHT_PAREN &kp JP_CARET
-
-&kp JP_EQUAL             &kp N4              &kp N5              &kp N6              &kp SLASH
-                                                &trans            &kp JP_GRAVE         &kp JP_HASH
-                                                &kp JP_AT         &kp JP_LEFT_BRACKET  &kp JP_RIGHT_BRACKET
-                                                &kp JP_PERCENT
-
-&mt LEFT_SHIFT N0        &kp N1              &kp N2              &kp N3              &kp JP_PERCENT
-                                                &kp PERIOD        &kp JP_PERCENT       &kp JP_EXCLAMATION
-                                                &kp JP_DOLLAR     &kp JP_LEFT_BRACE    &kp JP_RIGHT_BRACE
-                                                &kp JP_BACKSLASH
-
-&trans                   &trans              &trans              &kp JP_CARET         &kp JP_ASTERISK
-                                                &kp JP_PLUS       &trans               &trans
-                                                                                       &kp JP_PIPE
+&trans             &kp N7  &kp N8  &kp N9        &kp MINUS                                         &kp JP_AMPERSAND    &kp JP_TILDE   &kp JP_LEFT_PAREN    &kp JP_RIGHT_PAREN    &kp JP_CARET
+&kp JP_EQUAL       &kp N4  &kp N5  &kp N6        &kp SLASH        &trans           &kp JP_GRAVE    &kp JP_HASH         &kp JP_AT      &kp JP_LEFT_BRACKET  &kp JP_RIGHT_BRACKET  &kp JP_PERCENT
+&mt LEFT_SHIFT N0  &kp N1  &kp N2  &kp N3        &kp JP_PERCENT   &kp PERIOD       &kp JP_PERCENT  &kp JP_EXCLAMATION  &kp JP_DOLLAR  &kp JP_LEFT_BRACE    &kp JP_RIGHT_BRACE    &kp JP_BACKSLASH
+&trans             &trans  &trans  &kp JP_CARET  &kp JP_ASTERISK  &kp JP_PLUS      &trans          &trans                                                                        &kp JP_PIPE
             >;
         };
 
-        
         GESTURE {
             display-name = "Gesture";
-        
             bindings = <
-                &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans
-        
-                &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans
-        
-                &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans
-        
-                &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans
-            >;
-        };
-        
-        MAC_GESTURE {
-            display-name = "Mac Gesture";
-        
-            bindings = <
-                &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans
-        
-                &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans
-        
-                &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans
-        
-                &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
             >;
         };
 
+        MAC_GESTURE {
+            display-name = "Mac Gesture";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
+            >;
+        };
     };
 };
